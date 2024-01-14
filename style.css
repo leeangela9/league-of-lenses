@@ -1,0 +1,16 @@
+.title {
+    text-align: center;
+}
+
+form {
+    font-family: monospace;
+    text-align: center;
+}
+.label {
+    padding-bottom: 50px;
+}
+.upload {
+    background-color: lightblue;
+    padding: 50px 100px;
+    border-radius: 20px;
+}
