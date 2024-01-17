@@ -6,28 +6,137 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>avt</title>
-    <link rel="icon" href="duck.png">
+    <link rel="icon" href="i.png">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="title">
-        <p>automated video trimmer</p>
+    <!-- <hr> -->
+    <div class="topcontainer">
+        <div class="title">
+            <h1>automated video trimmer</h1>
+        </div>
+        <div>
+            <img src="howto.png" alt="studio ghibli icon" class="howto"> <a href="howto.html"></a>
+        </div>
     </div>
+    <hr>
+    <div class="hero1">
+        <div class="boxes">
+            <video src=""></video>
+        </div>
+        <img src="arrow.png" alt="" class="arrow">
+        <div class="boxes">
+            <video src=""></video>
+        </div>
+    </div>
+
+
+
     <div class="upload">
-        <form action="" method="post" id="form" enctype="multipart/form-data">
-            <div class="label">
-                <label for="file" id="label">submit video</label> <br>
+        <div>
+            <h2>Try it</2>
+        </div>
+        <!-- enctype="multipart/form-data" method="post"-->
+        <form id="form" onsubmit="handleFile(); return false">
+            <div class="hero2">
+                    <label for="input-file" id="drop-area">
+                        <input type="file" id="input-file" accept=".mp4" onchange="uploadVid()" required hidden> 
+                        <div id="img-view">
+                            <video controls autoplay loop src="vid.mp4" id="vid"></video>
+                            <p id="drop-txt">drag and drop or click to upload vid</p>
+                        </div>
+                    </label> 
+
+            </div>  
+
+            <div class="time">
+                <div class="time1">
+                    <div><h4>start</h4></div>
+                    <div>
+                        <input type="number" placeholder="mins" id="start-min"> 
+                    </div>
+                    <div>
+                        <h4>:</h4>
+                    </div>
+                    <div>
+                        <input type="number" placeholder="secs" id="start-sec"> 
+                    </div>
+                </div>
+                <div class="time2">
+                    <div><h4>end</h4></div>
+                    <div >
+                        <input type="number" placeholder="mins" id="end-min"> 
+                    </div>
+                    <div>
+                        <h4>:</h4>
+                    </div>
+                    <div>
+                        <input type="number" placeholder="secs" id="end-sec"> 
+                    </div>
+                </div>
             </div>
-            <div class="file">
-                <input type="file" id="file" accept=".mp4"> <br>
+            <div>
+                <input type="checkbox" id="audio">
+                <label>include sound?</label>
             </div>
             <div class="submit">
-                <input type="submit" value="Upload">
+                <input type="submit" value="Clip">
             </div>
         </form>
     </div>  
+
+    <div>
+        <h5>@2024</h5>
+    </div>
+
+    <script>
+        let inputFile = document.getElementById("input-file");
+        let imgView = document.getElementById("img-view");
+        let source = document.getElementById("vid");
+        let dropTxt = document.getElementById("drop-txt");
+
+        inputFile.addEventListener("change", uploadVid);
+
+        function uploadVid() {
+            let vidLink = URL.createObjectURL(inputFile.files[0]);
+            source.src = vidLink;
+            source.style.width = '90%';
+            dropTxt.textContent = "";
+            // source.parentElement.load();
+            
+        }
+        let startMin = document.getElementById("start-min");
+        let startSec = document.getElementById("start-sec");
+        let endMin = document.getElementById("end-min");
+        let endSec = document.getElementById("end-sec");
+        let audio = document.getElementById("audio");
+
+        function handleFile() {
+            let file = inputFile.files[0];
+
+            if (file) {
+
+                let audioBool = "M";
+                if (audio.checked) {
+                    audioBool = "A";
+                }
+
+                let startingSec = 0;
+                startingSec += Number(startMin.value) * 60 + Number(startSec.value);
+
+                let endingSec = startingSec + 60;
+                if (endMin.value !== "" || endSec.value !== "")
+                    endingSec = Number(endMin.value) * 60 + Number(endSec.value);
+
+                const newFileName = `${file.name.split(".")[0]}-${startingSec}-${endingSec}-${audioBool}`;
+                console.log(newFileName);
+            }
+        }
+
+
+    </script>
 </body>
 
 </html>
