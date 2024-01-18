@@ -148,7 +148,7 @@ input[type="number"]::-webkit-inner-spin-button {
 #img-view video {
     width: 300px;
     margin-top: 15px;
-    background-color: red;
+    /* background-color: red; */
     border-radius: 10px;
 }
 #img-view p {

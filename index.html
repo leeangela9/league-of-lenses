@@ -39,10 +39,10 @@
             <h2>Try it</2>
         </div>
         <!-- enctype="multipart/form-data" method="post"-->
-        <form id="form" onsubmit="handleFile(); return false">
+        <form id="form" onsubmit="handleFile(); return false;">
             <div class="hero2">
                     <label for="input-file" id="drop-area">
-                        <input type="file" id="input-file" accept=".mp4" onchange="uploadVid()" required hidden> 
+                        <input type="file" name="input-file" id="input-file" accept=".mp4" required hidden> 
                         <div id="img-view">
                             <video controls autoplay loop src="vid.mp4" id="vid"></video>
                             <p id="drop-txt">drag and drop or click to upload vid</p>
@@ -55,30 +55,30 @@
                 <div class="time1">
                     <div><h4>start</h4></div>
                     <div>
-                        <input type="number" placeholder="mins" id="start-min"> 
+                        <input type="number" name="start-min" placeholder="mins" id="start-min"> 
                     </div>
                     <div>
                         <h4>:</h4>
                     </div>
                     <div>
-                        <input type="number" placeholder="secs" id="start-sec"> 
+                        <input type="number" name="start-sec" placeholder="secs" id="start-sec"> 
                     </div>
                 </div>
                 <div class="time2">
                     <div><h4>end</h4></div>
                     <div >
-                        <input type="number" placeholder="mins" id="end-min"> 
+                        <input type="number" name="end-min"placeholder="mins" id="end-min"> 
                     </div>
                     <div>
                         <h4>:</h4>
                     </div>
                     <div>
-                        <input type="number" placeholder="secs" id="end-sec"> 
+                        <input type="number" name="end-sec" placeholder="secs" id="end-sec"> 
                     </div>
                 </div>
             </div>
             <div>
-                <input type="checkbox" id="audio">
+                <input type="checkbox" id="audio" name="audio">
                 <label>include sound?</label>
             </div>
             <div class="submit">
@@ -90,53 +90,8 @@
     <div>
         <h5>@2024</h5>
     </div>
-
-    <script>
-        let inputFile = document.getElementById("input-file");
-        let imgView = document.getElementById("img-view");
-        let source = document.getElementById("vid");
-        let dropTxt = document.getElementById("drop-txt");
-
-        inputFile.addEventListener("change", uploadVid);
-
-        function uploadVid() {
-            let vidLink = URL.createObjectURL(inputFile.files[0]);
-            source.src = vidLink;
-            source.style.width = '90%';
-            dropTxt.textContent = "";
-            // source.parentElement.load();
-            
-        }
-        let startMin = document.getElementById("start-min");
-        let startSec = document.getElementById("start-sec");
-        let endMin = document.getElementById("end-min");
-        let endSec = document.getElementById("end-sec");
-        let audio = document.getElementById("audio");
-
-        function handleFile() {
-            let file = inputFile.files[0];
-
-            if (file) {
-
-                let audioBool = "M";
-                if (audio.checked) {
-                    audioBool = "A";
-                }
-
-                let startingSec = 0;
-                startingSec += Number(startMin.value) * 60 + Number(startSec.value);
-
-                let endingSec = startingSec + 60;
-                if (endMin.value !== "" || endSec.value !== "")
-                    endingSec = Number(endMin.value) * 60 + Number(endSec.value);
-
-                const newFileName = `${file.name.split(".")[0]}-${startingSec}-${endingSec}-${audioBool}`;
-                console.log(newFileName);
-            }
-        }
-
-
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
