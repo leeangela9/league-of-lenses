@@ -58,17 +58,31 @@ function handleFile() {
 
             const uploadUrl = response.data.uploadUrl;
             const fileKey = response.data.fileKey;
+
+            const postUrl = "https://941jhpc24m.execute-api.us-east-1.amazonaws.com/Prod/clip";
             
             axios.put(uploadUrl, file, {
                 headers: {
-                    "Content-Type": 'video/mp4',
+                    // "Access-Control-Allow-Origin":"*",
+                    "Content-Type": 'video/mp4'
                 },
             }) 
             .then(function(response) {
                 console.log("Success: ", response);
+
+                axios.post(postUrl, {
+                    filename: fileKey,
+                })
+                .then(function(response) {
+                    console.log("Response: ", response);
+                    console.log("Clipped Link: ", response.data.url);
+                })
+                .catch(function(error) {
+                    console.log("Error: ", error);
+                })
             })
             .catch(function(error) {
-                console.log("Error: ", error)
+                console.log("Error: ", error);
             })
 
             
@@ -78,41 +92,7 @@ function handleFile() {
             console.log(error);
         });
 
-        // fetch(apiUrl, {
-        //     method: "POST",
-        //     body: JSON.stringify({"filename":newFileName}),
-        //     headers: {
-        //         "Content-Type":"application/json",
-        //     }
-            
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log("post api response: ", data);
-
-        //     const uploadUrl = response.data.uploadUrl;
-        //     const fileKey = response.data.fileKey;
-        //     console.log(uploadUrl);
-        //     console.log(fileKey);
-
-        //     fetch(uploadUrl, {
-        //         method: "PUT",
-        //         body: file,
-        //         headers: {
-        //             "Content-Type": contentType,
-        //         }
-        //     })
-        //     .then(r => r.json())
-        //     .then(d => {
-        //         console.log("put api response: ", d)
-        //     })
-        //     .catch(err => {
-        //         console.log("put error: ", err);
-        //     })
-        // })
-        // .catch(error => {
-        //     console.log("post error: ", error)
-        // });
+        
     }
 
 
