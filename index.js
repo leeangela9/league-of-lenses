@@ -49,7 +49,7 @@ function handleFile() {
 
        
         axios.post(apiUrl, {
-            filename: newFileName,
+            filename: newFileName + ".mp4",
             withCredentials: false,
 
         })
