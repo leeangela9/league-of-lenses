@@ -59,6 +59,9 @@ function handleFile() {
             const uploadUrl = response.data.uploadUrl;
             const fileKey = response.data.fileKey;
 
+            console.log(uploadUrl);
+            console.log(fileKey);
+
             const postUrl = "https://941jhpc24m.execute-api.us-east-1.amazonaws.com/Prod/clip";
             
             axios.put(uploadUrl, file, {
@@ -72,24 +75,25 @@ function handleFile() {
 
                 axios.post(postUrl, {
                     filename: fileKey,
+                    
                 })
                 .then(function(response) {
                     console.log("Response: ", response);
                     console.log("Clipped Link: ", response.data.url);
                 })
                 .catch(function(error) {
-                    console.log("Error: ", error);
+                    console.log("error 1: ", error);
                 })
             })
             .catch(function(error) {
-                console.log("Error: ", error);
+                console.log("error 2: ", error);
             })
 
             
 
         })
         .catch(function(error) {
-            console.log(error);
+            console.log("error 3: ", error);
         });
 
         
