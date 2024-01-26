@@ -4,14 +4,20 @@ body {
     color: rgb(3,4,94);
 }
 .title {
-    float: left;
+    /* float: left; */
     
-    margin-left: 30%;
+    /* margin-left: 30%; */
     margin-top: 20px;
     color: rgb(0,119,182);
+    /* margin: auto; */
+    text-align: center;
     /* background-color: red; */
 }
-
+.logo{
+    position: absolute;
+    right: 16px;
+    top:16px;
+}
 form {
     text-align: center;
     /* display: grid; */
@@ -41,7 +47,7 @@ input {
 .howto {
     height: 100px;
     width: 100px;
-    float: right;
+    /* float: right; */
 }
 .howto:hover {
     background-color: #ffe45e;
@@ -128,6 +134,12 @@ input[type="number"]::-webkit-inner-spin-button {
     border-radius: 10px;
     /* background-color: red; */
 }
+
+.boxes > video {
+    width: 100%;
+    height: 100%;
+}
+
 #drop-area {
     width: 400px;
     height: 250px;

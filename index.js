@@ -1,27 +1,23 @@
-// const axios = require("axios").default;
-// import axios from "axios"; 
-
 let inputFile = document.getElementById("input-file");
 let imgView = document.getElementById("img-view");
 let source = document.getElementById("vid");
 let dropTxt = document.getElementById("drop-txt");
+let form = document.getElementById("form");
 
-inputFile.addEventListener("change", uploadVid);
-
-function uploadVid() {
-    console.log('123')
-    let vidLink = URL.createObjectURL(inputFile.files[0]);
-    source.src = vidLink;
-    source.style.width = '90%';
-    dropTxt.textContent = "";
-    // source.parentElement.load();
-    
-}
 let startMin = document.getElementById("start-min");
 let startSec = document.getElementById("start-sec");
 let endMin = document.getElementById("end-min");
 let endSec = document.getElementById("end-sec");
 let audio = document.getElementById("audio");
+
+inputFile.addEventListener("change", uploadVid);
+
+function uploadVid() {
+    let vidLink = URL.createObjectURL(inputFile.files[0]);
+    source.src = vidLink;
+    source.style.width = '90%';
+    dropTxt.textContent = "";  
+}
 
 function handleFile() {
     // e.preventDefault();
@@ -30,24 +26,33 @@ function handleFile() {
 
     if (file) {
 
+        let clippedLink = "";
+
         let audioBool = "M";
         if (audio.checked) {
             audioBool = "A";
         }
 
+        const duration = Math.round(source.duration);
+
+        let endingSec = 0;
+        const endingInput = Number(endMin.value) * 60 + Number(endSec.value);
+
+        if ((endMin.value !== "" || endSec.value !== "") && (endingInput <= duration))
+            endingSec = endingInput;
+        else 
+            endingSec = duration;
+
         let startingSec = 0;
-        startingSec += Number(startMin.value) * 60 + Number(startSec.value);
+        const startingInput = Number(startMin.value) * 60 + Number(startSec.value);
+        if (startingInput < endingSec)
+            startingSec = startingInput;
 
-        let endingSec = startingSec + 60;
-        if (endMin.value !== "" || endSec.value !== "")
-            endingSec = Number(endMin.value) * 60 + Number(endSec.value);
-
-        const newFileName = `${file.name.split(".")[0]}-${startingSec}-${endingSec}-${audioBool}`;
+        const newFileName = `${file.name.split(".")[0]}${startingSec}${endingSec}${audioBool}`;
         console.log(newFileName);
 
         const apiUrl = "https://4f1wirqn9k.execute-api.us-east-1.amazonaws.com/Prod/upload";
 
-       
         axios.post(apiUrl, {
             filename: newFileName + ".mp4",
             withCredentials: false,
@@ -66,9 +71,8 @@ function handleFile() {
             
             axios.put(uploadUrl, file, {
                 headers: {
-                    // "Access-Control-Allow-Origin":"*",
                     "Content-Type": 'video/mp4'
-                },
+                }, 
             }) 
             .then(function(response) {
                 console.log("Success: ", response);
@@ -79,7 +83,8 @@ function handleFile() {
                 })
                 .then(function(response) {
                     console.log("Response: ", response);
-                    console.log("Clipped Link: ", response.data.url);
+                    clippedLink = response.data.url;
+                    console.log("Clipped Link: ", clippedLink);
                 })
                 .catch(function(error) {
                     console.log("error 1: ", error);
@@ -88,16 +93,14 @@ function handleFile() {
             .catch(function(error) {
                 console.log("error 2: ", error);
             })
-
-            
-
         })
         .catch(function(error) {
             console.log("error 3: ", error);
-        });
-
+        });  
+        
+        source.src = clippedLink;
+        dropTxt.textContent = clippedLink;
         
     }
-
 
 }

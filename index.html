@@ -12,23 +12,22 @@
 </head>
 
 <body>
-    <!-- <hr> -->
     <div class="topcontainer">
         <div class="title">
-            <h1>automated video trimmer</h1>
+            <h1>automated video trimmer: currently supports LoL</h1>
         </div>
-        <div>
+        <div class="logo">
             <img src="howto.png" alt="studio ghibli icon" class="howto"> <a href="howto.html"></a>
         </div>
     </div>
     <hr>
     <div class="hero1">
         <div class="boxes">
-            <video src=""></video>
+            <video controls autoplay loop muted src="bad.mp4"></video>
         </div>
         <img src="arrow.png" alt="" class="arrow">
         <div class="boxes">
-            <video src=""></video>
+            <video controls autoplay loop muted src="good.mp4"></video>
         </div>
     </div>
 
@@ -38,7 +37,6 @@
         <div>
             <h2>Try it</2>
         </div>
-        <!-- enctype="multipart/form-data" method="post"-->
         <form id="form" onsubmit="handleFile(); return false;">
             <div class="hero2">
                     <label for="input-file" id="drop-area">
