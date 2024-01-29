@@ -10,6 +10,12 @@ let endMin = document.getElementById("end-min");
 let endSec = document.getElementById("end-sec");
 let audio = document.getElementById("audio");
 
+let dDiv = document.getElementById("ddisplay");
+let dBtn = document.getElementById("dbtn");
+let timeDiv = document.getElementById("time");
+let soundDiv = document.getElementById("sound");
+let submitBtn = document.getElementById("submit");
+
 inputFile.addEventListener("change", uploadVid);
 
 function uploadVid() {
@@ -53,6 +59,11 @@ function handleFile() {
 
         const apiUrl = "https://4f1wirqn9k.execute-api.us-east-1.amazonaws.com/Prod/upload";
 
+        source.src = "loading.mp4";
+        timeDiv.style.display = "none";
+        soundDiv.style.display = "none";
+        submitBtn.style.display = "none";
+
         axios.post(apiUrl, {
             filename: newFileName + ".mp4",
             withCredentials: false,
@@ -75,16 +86,18 @@ function handleFile() {
                 }, 
             }) 
             .then(function(response) {
+
                 console.log("Success: ", response);
 
                 axios.post(postUrl, {
                     filename: fileKey,
-                    
                 })
                 .then(function(response) {
                     console.log("Response: ", response);
                     clippedLink = response.data.url;
                     console.log("Clipped Link: ", clippedLink);
+                    source.src = "done.mp4";
+                    dDiv.style.display = "block";
                 })
                 .catch(function(error) {
                     console.log("error 1: ", error);
@@ -97,10 +110,6 @@ function handleFile() {
         .catch(function(error) {
             console.log("error 3: ", error);
         });  
-        
-        source.src = clippedLink;
-        dropTxt.textContent = clippedLink;
-        
     }
 
 }

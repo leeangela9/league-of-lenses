@@ -1,17 +1,12 @@
-
 body {
+    /* font-family: sans-serif; */
     font-family: monospace;
-    color: rgb(3,4,94);
+    color: #C8AA6E;
+    background-image: linear-gradient(to left bottom, #0a1428, #0b172d, #0c1a33, #0d1c38, #0e1f3e, #0f2545, #102a4d, #103054, #0f3a60, #0c446b, #074f77, #005a82);
 }
 .title {
-    /* float: left; */
-    
-    /* margin-left: 30%; */
-    margin-top: 20px;
-    color: rgb(0,119,182);
-    /* margin: auto; */
+    margin-top: 30px;
     text-align: center;
-    /* background-color: red; */
 }
 .logo{
     position: absolute;
@@ -20,67 +15,45 @@ body {
 }
 form {
     text-align: center;
-    /* display: grid; */
-    /* margin: 10px; */
-    /* align-items: center; */
 }
-
 .upload {
-    background-color: lightblue;
     padding: 20px;
     border-radius: 15px;
-    /* height: 100px; */
     text-align: center;
     justify-content: center;
-    
+    border: 2px dashed white;
+    margin: 16px 15% 0 15%;
 }
 
 input {
     text-decoration: none;
-    /* background-color: aqua; */
     border-radius: 8px;
     font-family: monospace;
     border-color: rgb(0,180,216);
-
 }
-
 .howto {
     height: 100px;
     width: 100px;
-    /* float: right; */
+    padding: 3px;
 }
-.howto:hover {
-    background-color: #ffe45e;
-    border-radius: 40px;
+.logo:hover {
+    background-color: #C8AA6E;
+    border-radius: 80px;
 }
-
 .topcontainer {
     margin-bottom: 10px;
-    /* background-color: red; */
     border: 10px;
     padding: 10px 0px;
     display: block;
     height: 90px;
-    /* text-align: center; */
 }
-
 .time1, .time2 {
     display: flex;
-    margin-top: 10px;
-    /* background-color: yellow; */
-    /* height: 100px; */
-    /* align-items: center; */
-    /* padding: 0px; */
-    
-    
-}
-.time1 {
-    /* margin-left: 31%; */
+    margin-top: 10px;   
 }
 .time2 {
-    margin-left: 10px;
+    margin-left: 16px;
 }
-
 input[type=number] {
     width: 40px;
     /* text-decoration: none; */
@@ -89,27 +62,21 @@ input[type=number] {
     border-color: rgb(0,119,182);
 
 }
-.time {
+#time {
     display: flex;
-    /* align-items: center; */
     justify-content: center;
 }
 h4 {
     padding: 3px 4px 0px 4px;
-    /* position: relative; */
-    /* background-color: aquamarine; */
     margin-top: 0;
-
 }
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 .hero1 {
-    /* align-items: center; */
     width: 100%;
     min-height: 50vh;
-    background: linear-gradient(#90e0ef,#caf0f8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,56 +89,73 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .arrow {
     width: 10%;
-    /* background-color: red; */
-    /* display: flex; */
-    
 }
 .boxes {
     height: 250px;
     width: 250px;
-    border: 2px solid #0077b6;
-    margin: 20px;
-    border-radius: 10px;
-    /* background-color: red; */
+    border: 2px solid #005A82;
+    margin: 16px;
+    border-radius: 8px;
 }
-
 .boxes > video {
     width: 100%;
     height: 100%;
 }
-
 #drop-area {
     width: 400px;
     height: 250px;
     padding: 30px;
     text-align: center;
-    background: #caf0f8;
     border-radius: 10px;
 }
 #img-view {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    border: 2px dashed #90E0EF;
-    background: #caf0f8;
-    /* background-color: purple; */
-
+    border: 2px dashed white;
 }
 #img-view video {
     width: 300px;
-    margin-top: 15px;
-    /* background-color: red; */
+    margin-top: 16px;
     border-radius: 10px;
 }
 #img-view p {
     display: block;
     font-size: 12px;
-    color: #0077B6;
-    margin-top: 20px;
-    /* background-color: black; */
+    margin-top: 16px;
 }
 h5 {
     text-align: center;
 }
-
-
+#submit {
+    margin-top: 16px;
+}
+.btn {
+    width: 200;
+}
+#ddiv {
+    margin-top: 0;
+}
+#dbtn {
+    text-decoration: none;
+    color: white;
+}
+.dBtn {
+    font-family: monospace;
+    padding: 8px;
+    color: white;
+    border-radius: 8px;
+    margin: auto;
+}
+#ddisplay {
+    display: none;
+    border-radius: 10px;
+    background-color: #C8AA6E;
+    padding: 8px;
+    margin: auto;
+    width: 20%;
+}
+#img-view > #vid {
+    width: 90%;
+    height: 75%;
+}

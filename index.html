@@ -14,7 +14,7 @@
 <body>
     <div class="topcontainer">
         <div class="title">
-            <h1>automated video trimmer: currently supports LoL</h1>
+            <h1>automated shorts clipper: LoL</h1>
         </div>
         <div class="logo">
             <img src="howto.png" alt="studio ghibli icon" class="howto"> <a href="howto.html"></a>
@@ -23,16 +23,25 @@
     <hr>
     <div class="hero1">
         <div class="boxes">
-            <video controls autoplay loop muted src="bad.mp4"></video>
+            <video autoplay loop muted src="bad.mp4"></video>
         </div>
         <img src="arrow.png" alt="" class="arrow">
         <div class="boxes">
-            <video controls autoplay loop muted src="good.mp4"></video>
+            <video autoplay loop muted src="good.mp4"></video>
         </div>
     </div>
 
-
-
+    <!-- <div id="ddisplay">
+        <div class="d1">
+            <div class="d2">
+                <video autoplay loop muted src="" id="newVid"></video>
+            </div>
+        </div>
+        <div class="dBtn">
+            <a href="" id="dbtn">download</a>
+        </div>
+        </div>
+    </div> -->
     <div class="upload">
         <div>
             <h2>Try it</2>
@@ -42,14 +51,16 @@
                     <label for="input-file" id="drop-area">
                         <input type="file" name="input-file" id="input-file" accept=".mp4" required hidden> 
                         <div id="img-view">
-                            <video controls autoplay loop src="vid.mp4" id="vid"></video>
+                            <video autoplay loop muted src="b.mp4" id="vid"></video>
                             <p id="drop-txt">drag and drop or click to upload vid</p>
                         </div>
                     </label> 
 
-            </div>  
-
-            <div class="time">
+            </div>
+            <div id="ddisplay">
+                <a href="" id="dbtn">download</a>
+            </div>
+            <div id="time">
                 <div class="time1">
                     <div><h4>start</h4></div>
                     <div>
@@ -75,14 +86,15 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div id="sound">
                 <input type="checkbox" id="audio" name="audio">
                 <label>include sound?</label>
             </div>
-            <div class="submit">
+            <div id="submit">
                 <input type="submit" value="Clip">
             </div>
         </form>
+        
     </div>  
 
     <div>
