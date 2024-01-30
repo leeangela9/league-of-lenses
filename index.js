@@ -98,6 +98,7 @@ function handleFile() {
                     console.log("Clipped Link: ", clippedLink);
                     source.src = "done.mp4";
                     dDiv.style.display = "block";
+                    dBtn.href = clippedLink;
                 })
                 .catch(function(error) {
                     console.log("error 1: ", error);
