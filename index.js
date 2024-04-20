@@ -76,7 +76,7 @@ function handleFile() {
     soundDiv.style.display = "none";
     submitBtn.style.display = "none";
     let fileKey = "";
-
+    let queueURL = "";
     axios
       .post(apiUrl, {
         filename: newFileName + ".mp4",
@@ -87,10 +87,9 @@ function handleFile() {
 
         const uploadUrl = response.data.uploadUrl;
         fileKey = response.data.fileKey;
-
-        console.log(uploadUrl);
+        queueURL = response.data.queueURL;
         console.log(fileKey);
-
+        console.log(queueURL);
         const postUrl =
           "https://n4g5fjhkqdah2chkv7xzpadfby0gexzo.lambda-url.us-east-1.on.aws/";
 
@@ -109,7 +108,7 @@ function handleFile() {
               console.log("getting clipped link", fileKey.split("-")[0]);
               let r = await axios
                 .post(postUrl, {
-                  filename: fileKey.split("-")[0],
+                  queueURL: queueURL,
                 })
                 .then(function (response) {
                   console.log("Response: ", response);
@@ -135,7 +134,6 @@ function handleFile() {
                 break;
               }
               counter++;
-              await new Promise((resolve) => setTimeout(resolve, 10000));
             }
 
             // axios
