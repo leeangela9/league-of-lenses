@@ -1,107 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>avt</title>
-    <link rel="icon" href="i.png">
+    <link rel="icon" href="" />
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link href="./output.css" rel="stylesheet" />
+  </head>
 
-<body>
-    <div class="topcontainer">
-        <div class="title">
-            <h1>automated shorts clipper: LoL</h1>
-        </div>
-        <div class="logo">
+  <body>
+    <div class="topcontainer ml-4 mt-8 mb-6 flex justify-center">
+      <div class="title">
+        <h1 class="text-5xl">League of Lenses</h1>
+      </div>
+      <div>
+        <img src="" alt="" />
+      </div>
+      <!-- <div class="logo">
             <img src="howto.png" alt="studio ghibli icon" class="howto"> <a href="howto.html"></a>
-        </div>
-    </div>
-    <hr>
-    <div class="hero1">
-        <div class="boxes">
-            <video autoplay loop muted src="bad.mp4"></video>
-        </div>
-        <img src="arrow.png" alt="" class="arrow">
-        <div class="boxes">
-            <video autoplay loop muted src="good.mp4"></video>
-        </div>
+        </div> -->
     </div>
 
-    <!-- <div id="ddisplay">
-        <div class="d1">
-            <div class="d2">
-                <video autoplay loop muted src="" id="newVid"></video>
-            </div>
+    <!-- <div class="hero1 flex space-x-4 w-full justify-between mx-2">
+      <div class="boxes flex-1">
+        <video autoplay loop muted src="bad.mp4"></video>
+      </div>
+      <div class="boxes flex-1">
+            <img src="arrow.png" alt="" class="arrow">
         </div>
-        <div class="dBtn">
-            <a href="" id="dbtn">download</a>
-        </div>
-        </div>
+
+      <div class="boxes flex-1">
+        <video autoplay loop muted src="good.mp4"></video>
+      </div>
     </div> -->
-    <div class="upload">
-        <div>
-            <h2>Try it</2>
+
+    <div class="upload w-full">
+      <form
+        id="form"
+        onsubmit="handleFile(); return false;"
+        class="flex flex-col space-y-4 mt-4 items-center "
+      >
+      <div >
+        <div class="hero2 rounded-lg w-[450px] h-[250px] p-8 text-center align-center " id="v-container">
+          <label for="input-file" id="drop-area" class="w-full h-full flex justify-center items-center flex-col border-2 border-solid rounded-lg cursor-pointer">
+            <input
+              type="file"
+              name="input-file"
+              id="input-file"
+              accept=".mp4, .mov"
+              required
+              hidden
+              class="w-full h-full"
+            >
+            <div>
+              <!-- <div class="box">
+                <div
+                  id="loading-box"
+                  class="rounded-lg overflow-hidden w-full m-1 z-10 bg-black"
+                >
+                  loading
+                </div>
+              </div> -->
+              <div class="w-full hidden" id="loading-box">
+                <div class="loader"></div>
+                Loading
+              </div>
+            </div>
+            <div class="overflow-hidden">
+              <video src="" id="vid" autoplay muted loop class="hidden"></video>
+            </div>
+              <p
+                id="drop-txt"
+                class="text-md px-2 rounded-lg text-center cursor-pointer"
+              >
+                Upload Video
+              </p>
+            </div>
+          </label>
         </div>
-        <form id="form" onsubmit="handleFile(); return false;">
-            <div class="hero2">
-                    <label for="input-file" id="drop-area">
-                        <input type="file" name="input-file" id="input-file" accept=".mp4" required hidden> 
-                        <div id="img-view">
-                            <video autoplay loop muted src="b.mp4" id="vid"></video>
-                            <p id="drop-txt">drag and drop or click to upload vid</p>
-                        </div>
-                    </label> 
 
-            </div>
-            <div id="ddisplay">
-                <a href="" id="dbtn">download</a>
-            </div>
-            <div id="time">
-                <div class="time1">
-                    <div><h4>start</h4></div>
-                    <div>
-                        <input type="number" name="start-min" placeholder="mins" id="start-min"> 
-                    </div>
-                    <div>
-                        <h4>:</h4>
-                    </div>
-                    <div>
-                        <input type="number" name="start-sec" placeholder="secs" id="start-sec"> 
-                    </div>
-                </div>
-                <div class="time2">
-                    <div><h4>end</h4></div>
-                    <div >
-                        <input type="number" name="end-min"placeholder="mins" id="end-min"> 
-                    </div>
-                    <div>
-                        <h4>:</h4>
-                    </div>
-                    <div>
-                        <input type="number" name="end-sec" placeholder="secs" id="end-sec"> 
-                    </div>
-                </div>
-            </div>
-            <div id="sound">
-                <input type="checkbox" id="audio" name="audio">
-                <label>include sound?</label>
-            </div>
-            <div id="submit">
-                <input type="submit" value="Clip">
-            </div>
-        </form>
-        
-    </div>  
+        <div id="ddisplay" class="hidden">
+          <a href="" id="dbtn">download</a>
+        </div>
+        <div id="time" class="space-y-4">
+          <div class="time1 flex flex-row space-x-2">
+            <div class="flex-1 text-right"><h4>start</h4></div>
+            <div >
+              <input
+                type="number"
+                name="start-min"
+                placeholder="mins"
+                id="start-min"
 
+              />
+            </div>
+            <div>
+              <h4>:</h4>
+            </div>
+            <div >
+              <input
+                type="number"
+                name="start-sec"
+                placeholder="secs"
+                id="start-sec"
+  
+              />
+            </div>
+          </div>
+          <div class="time2 flex flex-row space-x-2">
+            <div class="text-right"><h4>end</h4></div>
+            <div>
+              <input
+                type="number"
+                name="end-min"
+                placeholder="mins"
+                id="end-min"
+              />
+            </div>
+            <div>
+              <h4>:</h4>
+            </div>
+            <div>
+              <input
+                type="number"
+                name="end-sec"
+                placeholder="secs"
+                id="end-sec"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="sound">
+          <input type="checkbox" id="audio" name="audio" />
+          <label>include sound?</label>
+        </div>
+        <div
+          id="submit"
+          class="rounded-lg bg-white block px-2 hover:bg-sky-700 cursor-pointer"
+        >
+          <input
+            type="submit"
+            value="Clip"
+            class="text-lg hover:text-white cursor-pointer"
+          />
+        </div>
+      </form>
+    </div>
     <div>
-        <h5>@2024</h5>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus expedita
+        id eaque ab amet, soluta asperiores ex vitae. Nihil possimus alias illum
+        omnis mollitia voluptas voluptates iusto hic labore nesciunt?
+      </div>
+    </div>
+    <div class="text-center">
+      <h5>@2024</h5>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="index.js"></script>
-</body>
-
+  </body>
 </html>
