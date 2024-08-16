@@ -1,3 +1,6 @@
+// const axios = require("axios");
+const poll = require("poll");
+
 let inputFile = document.getElementById("input-file");
 let imgView = document.getElementById("img-view");
 let source = document.getElementById("vid");
@@ -127,12 +130,12 @@ function handleFile() {
           .then(function (response) {
             console.log("Success: ", response);
 
-            axios
-              .post(postUrl, {
+            const checkCondition = async () => {
+              const res = await axios.post(postUrl, {
                 filename: fileKey,
-              })
-              .then(function (response) {
-                console.log("Response: ", response);
+              });
+              if (res.status === 200) {
+                console.log("successful res: ", res);
                 clippedLink = response.data.url;
                 console.log("Clipped Link: ", clippedLink);
                 loader.style.display = "hidden";
@@ -140,10 +143,37 @@ function handleFile() {
                 source.src = "done.mp4";
                 dDiv.style.display = "block";
                 dBtn.href = clippedLink;
-              })
-              .catch(function (error) {
-                console.log("error 1: ", error);
-              });
+                return true;
+              }
+              return false;
+            };
+
+            const options = {
+              interval: 10000,
+              shouldContinue: (result) => !result,
+            };
+
+            poll(checkCondition, options)
+              .then(() => console.log("poll stopped"))
+              .catch((err) => console.log("error: ", err));
+
+            // axios
+            //   .post(postUrl, {
+            //     filename: fileKey,
+            //   })
+            //   .then(function (response) {
+            //     console.log("Response: ", response);
+            //     clippedLink = response.data.url;
+            //     console.log("Clipped Link: ", clippedLink);
+            //     loader.style.display = "hidden";
+            //     source.style.display = "block";
+            //     source.src = "done.mp4";
+            //     dDiv.style.display = "block";
+            //     dBtn.href = clippedLink;
+            //   })
+            //   .catch(function (error) {
+            //     console.log("error 1: ", error);
+            //   });
           })
           .catch(function (error) {
             console.log("error 2: ", error);
