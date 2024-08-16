@@ -73,9 +73,10 @@ const handleFile = async (e) => {
         console.log(uploadUrl);
         console.log(fileKey);
 
-        const postUrl =
-          "https://941jhpc24m.execute-api.us-east-1.amazonaws.com/Prod/clip";
-
+        // const postUrl =
+        //   "https://941jhpc24m.execute-api.us-east-1.amazonaws.com/Prod/clip";
+        
+        const postUrl = "https://n4g5fjhkqdah2chkv7xzpadfby0gexzo.lambda-url.us-east-1.on.aws/";
         await axios
           .put(uploadUrl, file, {
             headers: {
@@ -104,6 +105,17 @@ const handleFile = async (e) => {
                 })
                 .catch(async (error) => {
                   console.log("error 1: ", error);
+                    if (error.response.status === 200) {
+                       stop = true;
+                        console.log("Response IN ERROR: ", response);
+                        clippedLink = error.data.url;
+                        console.log("Clipped Link: ", clippedLink);
+                        loader.style.display = "hidden";
+                        source.style.display = "block";
+                        source.src = "done.mp4";
+                        dDiv.style.display = "block";
+                        dBtn.href = clippedLink;
+                  }
                   await new Promise((r) => setTimeout(r, 10000));
                 });
             }
