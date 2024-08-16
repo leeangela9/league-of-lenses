@@ -101,8 +101,9 @@ const handleFile = (e) => {
                   dDiv.style.display = "block";
                   dBtn.href = clippedLink;
                 })
-                .catch(function (error) {
+                .catch(async (error) => {
                   console.log("error 1: ", error);
+                  await new Promise((r) => setTimeout(r, 10000));
                 });
             }
           })
