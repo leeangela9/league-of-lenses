@@ -18,7 +18,7 @@ let timeDiv = document.getElementById("time");
 let soundDiv = document.getElementById("sound");
 let submitBtn = document.getElementById("submit");
 
-const handleFile = (e) => {
+const handleFile = async (e) => {
   e.preventDefault();
 
   const file = inputFile.files[0];
@@ -58,12 +58,12 @@ const handleFile = (e) => {
     const apiUrl =
       "https://4f1wirqn9k.execute-api.us-east-1.amazonaws.com/Prod/upload";
 
-    axios
+    await axios
       .post(apiUrl, {
         filename: newFileName + ".mp4",
         withCredentials: false,
       })
-      .then(function (response) {
+      .then(async function (response) {
         console.log("api response: ", response);
 
         const uploadUrl = response.data.uploadUrl;
@@ -75,18 +75,18 @@ const handleFile = (e) => {
         const postUrl =
           "https://941jhpc24m.execute-api.us-east-1.amazonaws.com/Prod/clip";
 
-        axios
+        await axios
           .put(uploadUrl, file, {
             headers: {
               "Content-Type": "video/mp4",
             },
           })
-          .then(function (response) {
+          .then(async function (response) {
             console.log("Success: ", response);
             let stop = false;
 
             while (!stop) {
-              axios
+              await axios
                 .post(postUrl, {
                   filename: fileKey,
                 })
