@@ -95,7 +95,7 @@ const handleFile = async (e) => {
                 .then(function (response) {
                   stop = true;
                   console.log("Response: ", response);
-                  clippedLink = response.data.url;
+                  clippedLink = response.data
                   console.log("Clipped Link: ", clippedLink);
                   loader.style.display = "hidden";
                   source.style.display = "block";
@@ -105,17 +105,17 @@ const handleFile = async (e) => {
                 })
                 .catch(async (error) => {
                   console.log("error 1: ", error);
-                    if (error.response.status === 200) {
-                       stop = true;
-                        console.log("Response IN ERROR: ", response);
-                        clippedLink = error.data.url;
-                        console.log("Clipped Link: ", clippedLink);
-                        loader.style.display = "hidden";
-                        source.style.display = "block";
-                        source.src = "done.mp4";
-                        dDiv.style.display = "block";
-                        dBtn.href = clippedLink;
-                  }
+                  //   if (error.response.status === 200) {
+                  //      stop = true;
+                  //       console.log("Response IN ERROR: ", response);
+                  //       clippedLink = error.data
+                  //       console.log("Clipped Link: ", clippedLink);
+                  //       loader.style.display = "hidden";
+                  //       source.style.display = "block";
+                  //       source.src = "done.mp4";
+                  //       dDiv.style.display = "block";
+                  //       dBtn.href = clippedLink;
+                  // }
                   await new Promise((r) => setTimeout(r, 10000));
                 });
             }
