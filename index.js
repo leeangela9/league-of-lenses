@@ -20,7 +20,7 @@ let timeDiv = document.getElementById("time");
 let soundDiv = document.getElementById("sound");
 let submitBtn = document.getElementById("submit");
 
-const handleFile = () => {
+const handleFile = (e) => {
   e.preventDefault();
 
   const file = inputFile.files[0];
