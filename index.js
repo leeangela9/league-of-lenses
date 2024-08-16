@@ -24,13 +24,6 @@ const handleFile = (e) => {
   const file = inputFile.files[0];
 
   if (file) {
-    source.src = "";
-    timeDiv.style.display = "none";
-    soundDiv.style.display = "none";
-    submitBtn.style.display = "none";
-    source.style.display = "hidden";
-    loader.style.display = "block";
-
     let clippedLink = "";
 
     let audioBool = "M";
@@ -50,11 +43,17 @@ const handleFile = (e) => {
     let startingSec = 0;
     const startingInput = Number(startMin.value) * 60 + Number(startSec.value);
     if (startingInput < endingSec) startingSec = startingInput;
-
     const newFileName = `${
-      file.name.split(".")[0]
-    }${startingSec}${endingSec}${audioBool}`;
-    console.log(newFileName);
+      file.name.replaceAll("-", "").split(".")[0]
+    }-${startingSec}-${endingSec}-${audioBool}`;
+    console.log("name: ", newFileName);
+
+    source.src = "";
+    timeDiv.style.display = "none";
+    soundDiv.style.display = "none";
+    submitBtn.style.display = "none";
+    source.style.display = "hidden";
+    loader.style.display = "block";
 
     const apiUrl =
       "https://4f1wirqn9k.execute-api.us-east-1.amazonaws.com/Prod/upload";
