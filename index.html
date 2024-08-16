@@ -40,7 +40,6 @@
     <div class="upload w-full">
       <form
         id="form"
-        onsubmit="handleFile(); return false;"
         class="flex flex-col space-y-4 mt-4 items-center "
       >
       <div >
@@ -141,11 +140,10 @@
           id="submit"
           class="rounded-lg bg-white block px-2 hover:bg-sky-700 cursor-pointer"
         >
-          <input
+          <button
             type="submit"
-            value="Clip"
             class="text-lg hover:text-white cursor-pointer"
-          />
+          >Clip</button>
         </div>
       </form>
     </div>

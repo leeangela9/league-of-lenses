@@ -20,50 +20,8 @@ let timeDiv = document.getElementById("time");
 let soundDiv = document.getElementById("sound");
 let submitBtn = document.getElementById("submit");
 
-inputFile.addEventListener("change", uploadVid);
-// from stack overflow to make random string
-function makeid(length) {
-  let result = "";
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const charactersLength = characters.length;
-  let counter = 0;
-  while (counter < length) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    counter += 1;
-  }
-  return result;
-}
-function uploadVid() {
-  let vidLink = URL.createObjectURL(inputFile.files[0]);
-  source.src = vidLink;
-  source.style.display = "block";
-
-  source.addEventListener("loadedmetadata", function () {
-    const width = source.videoWidth;
-    const height = source.videoHeight;
-    const ratio = width / height;
-    const max = 450;
-    let containerWidth, containerHeight;
-
-    if (ratio > 1) {
-      containerWidth = max;
-      containerHeight = max / ratio;
-      console.log(width, height, ratio, "->", containerWidth, containerHeight);
-    } else {
-      containerWidth = max * ratio;
-      containerHeight = max;
-      console.log(width, height, ratio, "->", containerWidth, containerHeight);
-    }
-
-    vidContainer.style.width = containerWidth + "px";
-    vidContainer.style.height = containerHeight + "px";
-    dropTxt.textContent = "";
-  });
-}
-
-function handleFile() {
-  // e.preventDefault();
+const handleFile = () => {
+  e.preventDefault();
 
   const file = inputFile.files[0];
 
@@ -182,4 +140,50 @@ function handleFile() {
         console.log("error 3: ", error);
       });
   }
+};
+
+const uploadVid = () => {
+  let vidLink = URL.createObjectURL(inputFile.files[0]);
+  source.src = vidLink;
+  source.style.display = "block";
+
+  source.addEventListener("loadedmetadata", function () {
+    const width = source.videoWidth;
+    const height = source.videoHeight;
+    const ratio = width / height;
+    const max = 450;
+    let containerWidth, containerHeight;
+
+    if (ratio > 1) {
+      containerWidth = max;
+      containerHeight = max / ratio;
+      console.log(width, height, ratio, "->", containerWidth, containerHeight);
+    } else {
+      containerWidth = max * ratio;
+      containerHeight = max;
+      console.log(width, height, ratio, "->", containerWidth, containerHeight);
+    }
+
+    vidContainer.style.width = containerWidth + "px";
+    vidContainer.style.height = containerHeight + "px";
+    dropTxt.textContent = "";
+  });
+};
+
+form.addEventListener("submit", handleFile);
+
+inputFile.addEventListener("change", uploadVid);
+
+// from stack overflow to make random string
+function makeid(length) {
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
 }
