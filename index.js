@@ -68,6 +68,7 @@ const handleFile = async (e) => {
 
         const uploadUrl = response.data.uploadUrl;
         const fileKey = response.data.fileKey;
+        const queueURL = response.data.queueURL;
 
         console.log(uploadUrl);
         console.log(fileKey);
@@ -88,7 +89,7 @@ const handleFile = async (e) => {
             while (!stop) {
               await axios
                 .post(postUrl, {
-                  filename: fileKey,
+                  queueURL: queueURL,
                 })
                 .then(function (response) {
                   stop = true;
