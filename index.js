@@ -1,5 +1,4 @@
-// const axios = require("axios");
-const poll = require("poll");
+import { poll } from "./poll.js";
 
 let inputFile = document.getElementById("input-file");
 let imgView = document.getElementById("img-view");
