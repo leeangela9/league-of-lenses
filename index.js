@@ -52,7 +52,7 @@ const handleFile = async (e) => {
     timeDiv.style.display = "none";
     soundDiv.style.display = "none";
     submitBtn.style.display = "none";
-    source.style.display = "hidden";
+    source.style.display = "none";
     loader.style.display = "block";
 
     const apiUrl =
@@ -75,8 +75,9 @@ const handleFile = async (e) => {
 
         // const postUrl =
         //   "https://941jhpc24m.execute-api.us-east-1.amazonaws.com/Prod/clip";
-        
-        const postUrl = "https://n4g5fjhkqdah2chkv7xzpadfby0gexzo.lambda-url.us-east-1.on.aws/";
+
+        const postUrl =
+          "https://n4g5fjhkqdah2chkv7xzpadfby0gexzo.lambda-url.us-east-1.on.aws/";
         await axios
           .put(uploadUrl, file, {
             headers: {
@@ -95,9 +96,9 @@ const handleFile = async (e) => {
                 .then(function (response) {
                   stop = true;
                   console.log("Response: ", response);
-                  clippedLink = response.data
+                  clippedLink = response.data;
                   console.log("Clipped Link: ", clippedLink);
-                  loader.style.display = "hidden";
+                  loader.style.display = "none";
                   source.style.display = "block";
                   source.src = "done.mp4";
                   dDiv.style.display = "block";
