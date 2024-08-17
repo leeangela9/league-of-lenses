@@ -44,7 +44,8 @@ const handleFile = async (e) => {
     const startingInput = Number(startMin.value) * 60 + Number(startSec.value);
     if (startingInput < endingSec) startingSec = startingInput;
     const newFileName = `${
-      file.name.replaceAll("-", "").split(".")[0]
+      // file.name.replaceAll("-", "").split(".")[0]
+      makeid(file.name.length)
     }-${startingSec}-${endingSec}-${audioBool}`;
     console.log("name: ", newFileName);
 
