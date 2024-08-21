@@ -11,7 +11,7 @@ body {
   /* font-family: sans-serif; */
   font-family: "Friz Quadrata", serif;
   color: #c8aa6e;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to left bottom,
     #0a1428,
     #0b172d,
@@ -25,7 +25,7 @@ body {
     #0c446b,
     #074f77,
     #005a82
-  );
+  ); */
 }
 
 input[type="number"] {
@@ -93,3 +93,10 @@ input[type="number"] {
     transform: rotate(1turn);
   }
 }
+/* ol {
+  list-style-type: decimal;
+}
+li {
+  display: list-item;
+  list-style-position: inside;
+} */
