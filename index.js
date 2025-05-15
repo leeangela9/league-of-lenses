@@ -3,6 +3,8 @@ let imgView = document.getElementById("img-view");
 let source = document.getElementById("vid");
 let dropTxt = document.getElementById("drop-txt");
 let form = document.getElementById("form");
+let vidContainer = document.getElementById("v-container");
+let loader = document.getElementById("loading-box");
 
 let startMin = document.getElementById("start-min");
 let startSec = document.getElementById("start-sec");
@@ -60,22 +62,23 @@ function handleFile() {
     let startingSec = 0;
     const startingInput = Number(startMin.value) * 60 + Number(startSec.value);
     if (startingInput < endingSec) startingSec = startingInput;
+    const newFileName = `${
+      // file.name.replaceAll("-", "").split(".")[0]
+      makeid(file.name.length)
+    }-${startingSec}-${endingSec}-${audioBool}`;
+    console.log("name: ", newFileName);
 
-    const newFileName = `${makeid(
-      10
-    )}-${startingSec}-${endingSec}-${audioBool}`;
-    console.log(newFileName);
+    source.src = "";
+    timeDiv.style.display = "none";
+    soundDiv.style.display = "none";
+    submitBtn.style.display = "none";
+    source.style.display = "none";
+    loader.style.display = "block";
 
     const apiUrl =
       "https://4f1wirqn9k.execute-api.us-east-1.amazonaws.com/Prod/upload";
 
-    source.src = "loading.mp4";
-    timeDiv.style.display = "none";
-    soundDiv.style.display = "none";
-    submitBtn.style.display = "none";
-    let fileKey = "";
-    let queueURL = "";
-    axios
+    await axios
       .post(apiUrl, {
         filename: newFileName + ".mp4",
         withCredentials: false,
@@ -84,13 +87,17 @@ function handleFile() {
         console.log("api response: ", response);
 
         const uploadUrl = response.data.uploadUrl;
-        fileKey = response.data.fileKey;
-        queueURL = response.data.queueURL;
+        const fileKey = response.data.fileKey;
+        const queueURL = response.data.queueURL;
+
+        console.log(uploadUrl);
         console.log(fileKey);
-        console.log(queueURL);
+
+        // const postUrl =
+        //   "https://941jhpc24m.execute-api.us-east-1.amazonaws.com/Prod/clip";
+
         const postUrl =
           "https://n4g5fjhkqdah2chkv7xzpadfby0gexzo.lambda-url.us-east-1.on.aws/";
-
         await axios
           .put(uploadUrl, file, {
             headers: {
@@ -99,23 +106,23 @@ function handleFile() {
           })
           .then(async function (response) {
             console.log("Success: ", response);
-            let counter = 0;
-            await new Promise((resolve) => setTimeout(resolve, 10000));
+            let stop = false;
 
-            while (counter < 10) {
-              console.log("getting clipped link", fileKey.split("-")[0]);
-              let r = await axios
+            while (!stop) {
+              await axios
                 .post(postUrl, {
                   queueURL: queueURL,
                 })
                 .then(function (response) {
+                  stop = true;
                   console.log("Response: ", response);
                   clippedLink = response.data;
                   console.log("Clipped Link: ", clippedLink);
+                  loader.style.display = "none";
+                  source.style.display = "block";
                   source.src = "done.mp4";
                   dDiv.style.display = "block";
                   dBtn.href = clippedLink;
-                  return clippedLink;
                 })
                 .catch(function (error) {
                   console.log("Not ready yet, retrying...");
@@ -128,10 +135,6 @@ function handleFile() {
                   }
                   return 0;
                 });
-              if (r !== 0) {
-                break;
-              }
-              counter++;
             }
           })
           .catch(function (error) {
@@ -142,4 +145,50 @@ function handleFile() {
         console.log("error 3: ", error);
       });
   }
+};
+
+const uploadVid = () => {
+  let vidLink = URL.createObjectURL(inputFile.files[0]);
+  source.src = vidLink;
+  source.style.display = "block";
+
+  source.addEventListener("loadedmetadata", function () {
+    const width = source.videoWidth;
+    const height = source.videoHeight;
+    const ratio = width / height;
+    const max = 450;
+    let containerWidth, containerHeight;
+
+    if (ratio > 1) {
+      containerWidth = max;
+      containerHeight = max / ratio;
+      console.log(width, height, ratio, "->", containerWidth, containerHeight);
+    } else {
+      containerWidth = max * ratio;
+      containerHeight = max;
+      console.log(width, height, ratio, "->", containerWidth, containerHeight);
+    }
+
+    vidContainer.style.width = containerWidth + "px";
+    vidContainer.style.height = containerHeight + "px";
+    dropTxt.textContent = "";
+  });
+};
+
+form.addEventListener("submit", handleFile);
+
+inputFile.addEventListener("change", uploadVid);
+
+// from stack overflow to make random string
+function makeid(length) {
+  let result = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const charactersLength = characters.length;
+  let counter = 0;
+  while (counter < length) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    counter += 1;
+  }
+  return result;
 }

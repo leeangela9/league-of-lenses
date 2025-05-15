@@ -1,100 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-blue-gradient">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>League of Lenses</title>
+    <link rel="icon" href="icon.png" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>avt</title>
-    <link rel="icon" href="i.png">
+    <link rel="stylesheet" href="style.css" />
+    <link href="./output.css" rel="stylesheet" />
+  </head>
 
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <div class="topcontainer">
-        <div class="title">
-            <h1>automated shorts clipper: LoL</h1>
-        </div>
-        <div class="logo">
-            <img src="howto.png" alt="studio ghibli icon" class="howto"> <a href="howto.html"></a>
-        </div>
-    </div>
-    <hr>
-    <div class="hero1">
-        <div class="boxes">
-        <h1 class="v1">Center Crop</h1>
-            <video autoplay loop muted src="bad.mp4"></video>
-        </div>
-        <img src="arrow.png" alt="" class="arrow">
-        <div class="boxes">
-
-        <h1 class="v1">Dynamic Crop</h1>
-            <video autoplay loop muted src="good.mp4"></video>
-        </div>
+  <body class="relative h-full pb-10 bg-blue-gradient min-h-screen">
+    <!-- top: title, ... -->
+    <div class="topcontainer ml-4 mt-8 justify-center flex">
+      <div class="title mb-8">
+        <h1 class="text-5xl">League of Lenses</h1>
+      </div>
     </div>
 
- 
-    <div class="upload">
+    <!-- main content -->
+    <div class="w-full items-center flex flex-col mb-8">
+      <!-- inputs -->
+      <form id="form" class="flex flex-col space-y-4 items-center">
         <div>
-            <h2>Try it</2>
+          <!-- file input -->
+          <div
+            class="hero2 rounded-lg w-[450px] h-[250px] p-8 text-center align-center"
+            id="v-container"
+          >
+            <label
+              for="input-file"
+              id="drop-area"
+              class="w-full h-full flex justify-center items-center flex-col border-2 border-solid rounded-lg cursor-pointer"
+            >
+              <input
+                type="file"
+                name="input-file"
+                id="input-file"
+                accept=".mp4, .mov"
+                required
+                hidden
+                class="w-full h-full"
+              />
+
+              <!-- ? -->
+              <div>
+                <!-- wait display -->
+                <div class="w-full hidden" id="loading-box">
+                  <div class="loader"></div>
+                  Loading
+                </div>
+              </div>
+
+              <!-- video -->
+              <div class="overflow-hidden">
+                <video
+                  src=""
+                  id="vid"
+                  autoplay
+                  muted
+                  loop
+                  class="hidden"
+                ></video>
+              </div>
+
+              <p
+                id="drop-txt"
+                class="text-md px-2 rounded-lg text-center cursor-pointer"
+              >
+                Upload Video
+              </p>
+            </label>
+          </div>
+
+          <!-- </label> -->
         </div>
-        <form id="form" onsubmit="handleFile(); return false;">
-            <div class="hero2">
-                    <label for="input-file" id="drop-area">
-                        <input type="file" name="input-file" id="input-file" accept=".mp4" required hidden> 
-                        <div id="img-view">
-                            <video autoplay loop muted src="b.mp4" id="vid"></video>
-                            <p id="drop-txt">drag and drop or click to upload vid</p>
-                        </div>
-                    </label> 
 
-            </div>
-            <div id="ddisplay">
-                <a href="" id="dbtn" download target="_blank">download</a>
-            </div>
-            <div id="time">
-                <div class="time1">
-                    <div><h4>start</h4></div>
-                    <div>
-                        <input type="number" name="start-min" placeholder="mins" id="start-min"> 
-                    </div>
-                    <div>
-                        <h4>:</h4>
-                    </div>
-                    <div>
-                        <input type="number" name="start-sec" placeholder="secs" id="start-sec"> 
-                    </div>
-                </div>
-                <div class="time2">
-                    <div><h4>end</h4></div>
-                    <div >
-                        <input type="number" name="end-min"placeholder="mins" id="end-min"> 
-                    </div>
-                    <div>
-                        <h4>:</h4>
-                    </div>
-                    <div>
-                        <input type="number" name="end-sec" placeholder="secs" id="end-sec"> 
-                    </div>
-                </div>
-            </div>
-            <div id="sound">
-                <input type="checkbox" id="audio" name="audio">
-                <label>include sound?</label>
-            </div>
-            <div id="submit">
-                <input type="submit" value="Clip">
-            </div>
-        </form>
-        
-    </div>  
+        <!-- download btn -->
+        <div
+          id="ddisplay"
+          class="hidden rounded-lg bg-white px-2 hover:bg-sky-700 cursor-pointer"
+        >
+          <a href="" id="dbtn">download</a>
+        </div>
 
-    <div>
-        <h5>@2024</h5>
+        <!-- time input -->
+        <div id="time" class="space-y-4">
+          <!-- start time -->
+          <div class="time1 flex flex-row space-x-2">
+            <div class="flex-1 text-right"><h4>start</h4></div>
+
+            <!-- start min -->
+            <div>
+              <input
+                type="number"
+                name="start-min"
+                placeholder="mins"
+                id="start-min"
+              />
+            </div>
+
+            <!-- : -->
+            <div>
+              <h4>:</h4>
+            </div>
+
+            <!-- start sec -->
+            <div>
+              <input
+                type="number"
+                name="start-sec"
+                placeholder="secs"
+                id="start-sec"
+              />
+            </div>
+          </div>
+          <!-- end time -->
+          <div class="time2 flex flex-row space-x-2">
+            <div class="text-right"><h4>end</h4></div>
+            <div>
+              <input
+                type="number"
+                name="end-min"
+                placeholder="mins"
+                id="end-min"
+              />
+            </div>
+
+            <div>
+              <h4>:</h4>
+            </div>
+
+            <div>
+              <input
+                type="number"
+                name="end-sec"
+                placeholder="secs"
+                id="end-sec"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- audio checkbox -->
+        <div id="sound">
+          <input type="checkbox" id="audio" name="audio" />
+          <label>include sound?</label>
+        </div>
+
+        <!-- submit btn -->
+        <div
+          id="submit"
+          class="rounded-lg bg-white block px-2 hover:bg-sky-700 cursor-pointer"
+        >
+          <button type="submit" class="text-lg hover:text-white cursor-pointer">
+            Clip
+          </button>
+        </div>
+      </form>
+
+      <!-- description -->
+      <div class="mt-4 w-[400px] text-left">
+        <p class="mb-4">
+          League of Lenses is the ultimate tool for League of Legends players
+          who want to showcase their best gameplay moments as YouTube Shorts.
+          Our web app allows you to effortlessly convert your League of Legends
+          clips into dynamic, action-packed videos. Unlike traditional video
+          editors, League of Lenses automatically zooms in on the most intense
+          fighting scenes, ensuring your audience stays engaged with every
+          critical moment.
+        </p>
+        <h2 class="text-lg mb-1">
+          How to Convert Your League of Legends Clips:
+        </h2>
+        <ol class="list-decimal list-inside mb-4">
+          <li>
+            Record Your Gameplay: Capture your favorite moments from your League
+            of Legends matches.
+          </li>
+          <li>
+            Upload Your Clip: Simply drag and drop your video into League of
+            Lenses.
+          </li>
+          <li>
+            Automatic Cropping: Watch as League of Lenses dynamically crops and
+            zooms into the most action-packed scenes, optimizing your clip for
+            YouTube Shorts.
+          </li>
+          <li>
+            Preview and Download: Review your video to make sure it’s perfect.
+            Then, download your new, high-impact clip ready to be shared with
+            the world.
+          </li>
+        </ol>
+        <p class="mb-2">
+          No need for complicated software—League of Lenses does all the heavy
+          lifting for you. Just focus on playing, and let us handle the rest.
+          Start turning your epic plays into captivating YouTube Shorts today!
+        </p>
+        <p>
+          By using League of Lenses, you agree to our Terms of Service. Thank
+          you for choosing us to amplify your League of Legends highlights!
+        </p>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="index.js"></script>
-</body>
 
+    <!-- footer -->
+    <footer
+      id="footer"
+      class="absolute left-0 bottom-0 w-full text-center mt-2"
+    >
+      <small>Angela Lee and Ming Lin © 2024</small>
+    </footer>
+
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
 </html>

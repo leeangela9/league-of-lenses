@@ -1,11 +1,17 @@
-html {
-  background-color: #0a1428;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Friz Quadrata";
+  src: url("fonts/FrizQuadrata.ttf") format("truetype");
 }
+
 body {
   /* font-family: sans-serif; */
-  font-family: monospace;
+  font-family: "Friz Quadrata", serif;
   color: #c8aa6e;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to left bottom,
     #0a1428,
     #0b172d,
@@ -19,171 +25,78 @@ body {
     #0c446b,
     #074f77,
     #005a82
-  );
-}
-.title {
-  margin-top: 30px;
-  text-align: center;
-}
-.logo {
-  position: absolute;
-  right: 16px;
-  top: 16px;
-}
-form {
-  text-align: center;
-}
-.upload {
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  justify-content: center;
-  border: 2px dashed white;
-  margin: 16px 15% 0 15%;
+  ); */
 }
 
-input {
-  text-decoration: none;
-  border-radius: 8px;
-  font-family: monospace;
-  border-color: rgb(0, 180, 216);
-}
-.howto {
-  height: 100px;
-  width: 100px;
-  padding: 3px;
-}
-.logo:hover {
-  background-color: #c8aa6e;
-  border-radius: 80px;
-}
-.topcontainer {
-  margin-bottom: 10px;
-  border: 10px;
-  padding: 10px 0px;
-  display: block;
-  height: 90px;
-}
-.time1,
-.time2 {
-  display: flex;
-  margin-top: 10px;
-}
-.time2 {
-  margin-left: 16px;
-}
 input[type="number"] {
-  width: 40px;
-  /* text-decoration: none; */
   text-align: center;
-  border-radius: 5px;
-  border-color: rgb(0, 119, 182);
+  border-radius: 4px;
 }
-#time {
-  display: flex;
-  justify-content: center;
-}
-h4 {
-  padding: 3px 4px 0px 4px;
-  margin-top: 0;
-}
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.hero1 {
-  width: 100%;
-  min-height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
+.box {
   position: relative;
-}
-.hero2 {
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-.arrow {
-  width: 10%;
-}
-.boxes {
-  height: 250px;
-  width: 250px;
-  border: 2px solid #005a82;
-  margin: 16px;
-  position: relative;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-  text-align: center;
+  overflow: hidden;
 }
-.boxes > video {
-  width: 100%;
+
+.box::before {
+  content: "";
+  width: 120%;
   height: 100%;
-}
-#drop-area {
-  width: 400px;
-  height: 250px;
-  padding: 30px;
-  text-align: center;
-  border-radius: 10px;
-}
-#img-view {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  border: 2px dashed white;
-}
-#img-view video {
-  width: 300px;
-  margin-top: 16px;
-  border-radius: 10px;
-}
-#img-view p {
-  display: block;
-  font-size: 12px;
-  margin-top: 16px;
-}
-h5 {
-  text-align: center;
-}
-#submit {
-  margin-top: 16px;
-}
-.btn {
-  width: 200;
-}
-#ddiv {
-  margin-top: 0;
-}
-#dbtn {
-  text-decoration: none;
-  color: white;
-}
-.dBtn {
-  font-family: monospace;
-  padding: 8px;
-  color: white;
-  border-radius: 8px;
-  margin: auto;
-}
-#ddisplay {
-  display: none;
-  border-radius: 10px;
-  background-color: #c8aa6e;
-  padding: 8px;
-  margin: auto;
-  width: 20%;
-}
-#img-view > #vid {
-  width: 90%;
-  height: 75%;
-}
-.v1 {
   position: absolute;
-  top: -60px;
-  left: 40px;
-  /* right: 20%; */
-  /* line-break: loose; */
-  white-space: nowrap;
+  background-color: white;
+  animation: rotate 4s linear infinite;
 }
+
+.box::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  --b: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%, #c8aa6e) content-box;
+  -webkit-mask: repeating-conic-gradient(
+      #0000 0deg,
+      #000 1deg 20deg,
+      #0000 21deg 36deg
+    ),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b))
+    );
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: l4 1s infinite steps(10);
+}
+@keyframes l4 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+/* ol {
+  list-style-type: decimal;
+}
+li {
+  display: list-item;
+  list-style-position: inside;
+} */
