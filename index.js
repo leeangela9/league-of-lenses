@@ -38,8 +38,6 @@ function uploadVid() {
 }
 
 function handleFile() {
-  // e.preventDefault();
-
   const file = inputFile.files[0];
 
   if (file) {
@@ -120,7 +118,7 @@ function handleFile() {
                   return clippedLink;
                 })
                 .catch(function (error) {
-                  console.log("error 1: ", error);
+                  console.log("Not ready yet, retrying...");
                   if (error.response.status === 200) {
                     console.log("Clipped Link: ", error.response.data);
                     source.src = "done.mp4";
@@ -135,22 +133,6 @@ function handleFile() {
               }
               counter++;
             }
-
-            // axios
-            //   .post(postUrl, {
-            //     filename: fileKey,
-            //   })
-            //   .then(function (response) {
-            //     console.log("Response: ", response);
-            //     clippedLink = response.data.url;
-            //     console.log("Clipped Link: ", clippedLink);
-            //     source.src = "done.mp4";
-            //     dDiv.style.display = "block";
-            //     dBtn.href = clippedLink;
-            //   })
-            //   .catch(function (error) {
-            //     console.log("error 1: ", error);
-            //   });
           })
           .catch(function (error) {
             console.log("error 2: ", error);
